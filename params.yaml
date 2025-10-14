@@ -1,6 +1,6 @@
 model:
   type: LogisticRegression
-  C: 1.0
+  C: 2.0
   max_iter: 150
   solver: lbfgs
 

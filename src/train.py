@@ -1,22 +1,24 @@
-# src/train.py
-import yaml, json, mlflow, mlflow.sklearn
+import yaml
+import json
+import os
 import pandas as pd
+import joblib
+import mlflow
+import mlflow.sklearn
+
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, f1_score
-import joblib
-import os
 
 # 1️⃣ Leer parámetros desde params.yaml
 with open("params.yaml") as f:
     params = yaml.safe_load(f)
 
-# --- Secciones ---
 paths = params["path"]
 model_cfg = params["model"]
 split_cfg = params["split"]
 
-# --- Variables ---
+# Variables de configuración
 input_path = paths["raw_data"]
 model_path = paths["model_path"]
 metrics_path = paths["metrics_path"]
@@ -28,35 +30,49 @@ solver = model_cfg["solver"]
 test_size = split_cfg["test_size"]
 random_state = split_cfg["random_state"]
 
-# 2️⃣ Leer dataset
+# 2️⃣ Cargar dataset
 df = pd.read_csv(input_path)
-X = df.drop(columns=["churn"])
-y = df["churn"]
 
-# 3️⃣ Split
+# Eliminar columnas irrelevantes si existen
+cols_to_drop = [col for col in ["customer_id", "CustomerID", "id"] if col in df.columns]
+df = df.drop(columns=cols_to_drop, errors="ignore")
+
+# 3️⃣ Separar X e y
+target_col = "churn"
+X = df.drop(columns=[target_col])
+y = df[target_col]
+
+# 4️⃣ Codificar variables categóricas automáticamente
+X = pd.get_dummies(X, drop_first=True)
+
+# 5️⃣ Dividir train/test
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=test_size, random_state=random_state
 )
 
-# 4️⃣ Configurar MLflow (DagsHub)
-mlflow.set_tracking_uri("https://github.com/edisonfernandezjef/TelcoVision.mlflow")
-mlflow.set_experiment("TelcoVision_Experiments")
+# 6️⃣ Configurar MLflow remoto (usa tus variables de entorno)
+mlflow.set_tracking_uri("https://dagshub.com/edisonjef/Telco.mlflow")
+mlflow.set_experiment("Telco_Experiments")
 
-# 5️⃣ Entrenar y registrar
 with mlflow.start_run():
+    # Registrar parámetros
     mlflow.log_params(model_cfg)
 
+    # 7️⃣ Entrenar modelo
     model = LogisticRegression(C=C, max_iter=max_iter, solver=solver)
     model.fit(X_train, y_train)
 
+    # 8️⃣ Evaluar
     y_pred = model.predict(X_test)
     acc = accuracy_score(y_test, y_pred)
     f1 = f1_score(y_test, y_pred)
 
+    # 9️⃣ Registrar métricas y modelo en MLflow
     mlflow.log_metrics({"accuracy": acc, "f1_score": f1})
-    mlflow.sklearn.log_model(model, "model")
+    # se comenta porque da error en la version actual de mlflow
+    # mlflow.sklearn.log_model(model, "model")
 
-    # 6️⃣ Guardar artefactos locales (DVC)
+    # 10️⃣ Guardar localmente (para DVC)
     os.makedirs(os.path.dirname(model_path), exist_ok=True)
     joblib.dump(model, model_path)
 
@@ -66,3 +82,4 @@ with mlflow.start_run():
 
 print(f"✅ Modelo guardado en: {model_path}")
 print(f"✅ Métricas guardadas en: {metrics_path}")
+

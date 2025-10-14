@@ -16,3 +16,37 @@ stages:
       hash: md5
       md5: 807cea6b20fdeb33112416662400ceb3
       size: 4688992
+  train:
+    cmd: python src/train.py
+    deps:
+    - path: data/raw/telco_churn.csv
+      hash: md5
+      md5: 006527876bfe18c977d74eb4bc59443f
+      size: 873370
+    - path: params.yaml
+      hash: md5
+      md5: 8ef53d14cb23c4c4eba13e16df2f72b2
+      size: 260
+    - path: src/train.py
+      hash: md5
+      md5: 17db214d12bf6ed29982536a49cd1407
+      size: 2566
+    params:
+      params.yaml:
+        model.C: 2.0
+        model.max_iter: 150
+        model.solver: lbfgs
+        path.metrics_path: metrics/metrics.json
+        path.model_path: models/telco_churn_model.pkl
+        path.raw_data: data/raw/telco_churn.csv
+        split.random_state: 42
+        split.test_size: 0.2
+    outs:
+    - path: metrics/metrics.json
+      hash: md5
+      md5: 40dcef1b99352a8df4a81516af3f6597
+      size: 52
+    - path: models/telco_churn_model.pkl
+      hash: md5
+      md5: 8f777ebdde9a6e7873f9c11aebeb73a8
+      size: 1759
