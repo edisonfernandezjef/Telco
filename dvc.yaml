@@ -1,0 +1,21 @@
+stages:
+  train:
+    cmd: python src/train.py
+    deps:
+      - src/train.py
+      - data/raw/telco_churn.csv
+      - params.yaml
+    params:
+      - model.C
+      - model.max_iter
+      - model.solver
+      - split.test_size
+      - split.random_state
+      - path.raw_data
+      - path.model_path
+      - path.metrics_path
+    outs:
+      - models/telco_churn_model.pkl
+    metrics:
+      - metrics/metrics.json
+
