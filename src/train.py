@@ -21,7 +21,7 @@ model_cfg = params["model"]
 split_cfg = params["split"]
 
 # --- Variables de configuración ---
-input_path = paths["raw_data"]
+input_path = paths["clean_data"]
 model_path = paths["model_path"]
 metrics_path = paths["metrics_path"]
 

@@ -12,5 +12,6 @@ split:
 
 path: 
   raw_data: data/raw/telco_churn.csv
+  clean_data: data/processed/telco_churn_clean.csv
   model_path: models/telco_churn_model.pkl
   metrics_path: metrics/metrics.json
