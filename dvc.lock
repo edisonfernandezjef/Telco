@@ -19,10 +19,10 @@ stages:
   train:
     cmd: python src/train.py
     deps:
-    - path: data/raw/telco_churn.csv
+    - path: data/processed/telco_churn_clean.csv
       hash: md5
-      md5: 006527876bfe18c977d74eb4bc59443f
-      size: 873370
+      md5: 807cea6b20fdeb33112416662400ceb3
+      size: 4688992
     - path: params.yaml
       hash: md5
       md5: b9523b459a393f5947face9e8ba10e5d
@@ -44,9 +44,9 @@ stages:
     outs:
     - path: metrics/metrics.json
       hash: md5
-      md5: 8925dea535335e87db72895733d9d3f2
-      size: 52
+      md5: c0a0a962e9eedaf14d69ea3772298df0
+      size: 53
     - path: models/telco_churn_model.pkl
       hash: md5
-      md5: 1cc605503ac688a1d0c69cd15d76c1eb
+      md5: 524c0c3119e6214cdfabc9d7df93b621
       size: 1759

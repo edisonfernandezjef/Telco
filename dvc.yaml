@@ -6,12 +6,12 @@ stages:
     - data/raw/telco_churn.csv
     outs:
     - data/processed/telco_churn_clean.csv
-    
+
   train:
     cmd: python src/train.py
     deps:
     - src/train.py
-    - data/raw/telco_churn.csv
+    - data/processed/telco_churn_clean.csv
     - params.yaml
     params:
     - model.C
