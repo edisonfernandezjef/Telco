@@ -1,8 +1,8 @@
 model:
   type: LogisticRegression
   C: 2.0
-  max_iter: 50
-  solver: saga
+  max_iter: 400
+  solver: lbfgs
 
 
 
