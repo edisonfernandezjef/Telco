@@ -25,16 +25,16 @@ stages:
       size: 873370
     - path: params.yaml
       hash: md5
-      md5: 60db3a81848ed358ecd3b5f298493a9a
-      size: 244
+      md5: b9523b459a393f5947face9e8ba10e5d
+      size: 243
     - path: src/train.py
       hash: md5
-      md5: 409741878ecc3c833474d3c572cfee93
-      size: 4579
+      md5: c5fc24abf0dc8546c8530f3e772d2972
+      size: 3197
     params:
       params.yaml:
         model.C: 2.0
-        model.max_iter: 300
+        model.max_iter: 50
         model.solver: saga
         path.metrics_path: metrics/metrics.json
         path.model_path: models/telco_churn_model.pkl
@@ -44,9 +44,9 @@ stages:
     outs:
     - path: metrics/metrics.json
       hash: md5
-      md5: bdb5bca4ac42b24abe2d9e6af5599c34
-      size: 53
+      md5: 8925dea535335e87db72895733d9d3f2
+      size: 52
     - path: models/telco_churn_model.pkl
       hash: md5
-      md5: 8e15e178370adb083926d2dc328c00f2
+      md5: 1cc605503ac688a1d0c69cd15d76c1eb
       size: 1759
