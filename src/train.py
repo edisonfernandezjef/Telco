@@ -53,8 +53,8 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=test_size, random_state=random_state
 )
 
-# 6️⃣ Configurar MLflow remoto (usa tus variables de entorno)
-mlflow.set_tracking_uri("https://dagshub.com/edisonjef/Telco.mlflow")
+# 6️⃣ Configurar MLflow local
+mlflow.set_tracking_uri("file:./mlruns")
 mlflow.set_experiment("Telco")
 
 # Crear un nombre legible para el experimento
