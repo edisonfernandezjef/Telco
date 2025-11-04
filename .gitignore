@@ -3,3 +3,4 @@ src/data_prep.ipynb
 src/logs.log
 data/processed/telco_churn_clean.csv
 logs.log
+.tmp_dagster_home_4blcs7kj/

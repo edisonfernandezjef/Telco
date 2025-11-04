@@ -1,0 +1,18 @@
+# dagster_home/dagster.yaml
+run_coordinator:
+  module: dagster._core.run_coordinator
+  class: DefaultRunCoordinator
+
+# Guardar logs de ejecución localmente (opcional)
+compute_logs:
+  module: dagster._core.storage.local_compute_log_manager
+  class: LocalComputeLogManager
+  config:
+    base_dir: "C:\\Users\\yazed\\OneDrive\\Documentos\\Istea\\Segundo Año\\Segundo Cuatrimestre\\Laboratorio de mineria de datos\\TelcoVision_proyecto2\\dagster_home\\storage"
+
+# Almacenar historial de runs
+run_storage:
+  module: dagster._core.storage.runs
+  class: SqliteRunStorage
+  config:
+    base_dir: "C:\\Users\\yazed\\OneDrive\\Documentos\\Istea\\Segundo Año\\Segundo Cuatrimestre\\Laboratorio de mineria de datos\\TelcoVision_proyecto2\\dagster_home\\history"
