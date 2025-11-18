@@ -1,0 +1,44 @@
+name: CI TelcoVision
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  run_pipeline:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🧠 Clonar repositorio
+      uses: actions/checkout@v4
+
+    - name: 🐍 Configurar Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
+
+    - name: 📦 Instalar dependencias
+      run: |
+        pip install -r requirements.txt
+        pip install dvc[all]
+
+    - name: 🔐 Configurar credenciales de DagsHub
+      env:
+        DAGSHUB_USER: "edisonjef"
+        DAGSHUB_TOKEN: "838331baac64c93dae8315a9defd4a4449bc936a"
+      run: |
+        git config --global credential.helper store
+        echo "https://${DAGSHUB_USER}:${DAGSHUB_TOKEN}@dagshub.com" > ~/.git-credentials
+        dvc remote modify origin auth basic
+        dvc remote modify origin user $DAGSHUB_USER
+        dvc remote modify origin password $DAGSHUB_TOKEN
+
+    - name: 📥 Descargar datos versionados (DVC)
+      run: dvc pull
+
+    - name: ⚙️ Ejecutar pipeline TelcoVision
+      run: dvc repro
+
+    - name: 📊 Mostrar métricas
+      run: cat metrics.json
