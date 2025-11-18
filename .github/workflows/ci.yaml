@@ -2,9 +2,9 @@ name: CI TelcoVision
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, ci_cd ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, ci_cd ]
 
 jobs:
   run_pipeline:
