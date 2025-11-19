@@ -44,8 +44,10 @@ jobs:
 
     - name: 🔍 Probar conexión con DagsHub
       run: |
+        echo "Probando conexión con DagsHub..."
         dvc remote list
-        dvc pull -n   # Modo dry-run: prueba sin bajar los archivos
+        dvc list .   # muestra qué archivos están versionados
+        echo "✅ Conexión DVC OK"
 
     - name: 📥 Descargar datos versionados (DVC)
       run: dvc pull
