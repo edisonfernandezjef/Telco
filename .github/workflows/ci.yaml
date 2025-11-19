@@ -23,7 +23,7 @@ jobs:
         pip install -r requirements.txt
         pip install dvc[all]
 
-        - name: 🔐 Configurar credenciales de DagsHub (HTTP)
+    - name: 🔐 Configurar credenciales de DagsHub (HTTP)
       env:
         DAGSHUB_USER: ${{ secrets.DAGSHUB_USER }}
         DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
@@ -37,7 +37,7 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.DAGSHUB_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.DAGSHUB_SECRET_ACCESS_KEY }}
       run: echo "S3 credentials ready."
-      
+
     - name: 📥 Descargar datos versionados (DVC)
       run: dvc pull
 
