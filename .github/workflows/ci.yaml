@@ -23,7 +23,7 @@ jobs:
         pip install -r requirements.txt
         pip install dvc[all]
 
-      - name: 🔐 Configurar credenciales de DagsHub
+    - name: 🔐 Configurar credenciales de DagsHub
       env:
         DAGSHUB_USER: "edisonjef"
         DAGSHUB_TOKEN: "838331baac64c93dae8315a9defd4a4449bc936a"
