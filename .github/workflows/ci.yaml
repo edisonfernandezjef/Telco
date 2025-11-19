@@ -23,17 +23,20 @@ jobs:
         pip install -r requirements.txt
         pip install dvc[all]
 
-    - name: 🔐 Configurar credenciales de DagsHub
+      - name: 🔐 Configurar credenciales de DagsHub
       env:
         DAGSHUB_USER: "edisonjef"
         DAGSHUB_TOKEN: "838331baac64c93dae8315a9defd4a4449bc936a"
       run: |
-        git config --global credential.helper store
-        echo "https://${DAGSHUB_USER}:${DAGSHUB_TOKEN}@dagshub.com" > ~/.git-credentials
-        dvc remote modify origin --local user $DAGSHUB_USER
-        dvc remote modify origin --local password $DAGSHUB_TOKEN
-        dvc remote modify origin --local url https://dagshub.com/edisonfernandez/TelcoVision.dvc
+        # Guardar credenciales de Git para que DVC pueda acceder al remoto
+        echo "machine dagshub.com login $DAGSHUB_USER password $DAGSHUB_TOKEN" > ~/.netrc
+        
+        # Exportar variables de entorno (necesarias para DVC >=3.x)
+        echo "DAGSHUB_USER=$DAGSHUB_USER" >> $GITHUB_ENV
+        echo "DAGSHUB_TOKEN=$DAGSHUB_TOKEN" >> $GITHUB_ENV
 
+        # Mostrar el remoto configurado
+        dvc remote list
     - name: 📥 Descargar datos versionados (DVC)
       run: dvc pull
 
