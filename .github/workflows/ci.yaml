@@ -30,9 +30,9 @@ jobs:
       run: |
         git config --global credential.helper store
         echo "https://${DAGSHUB_USER}:${DAGSHUB_TOKEN}@dagshub.com" > ~/.git-credentials
-        dvc remote modify origin auth basic
-        dvc remote modify origin user $DAGSHUB_USER
-        dvc remote modify origin password $DAGSHUB_TOKEN
+        dvc remote modify origin --local user $DAGSHUB_USER
+        dvc remote modify origin --local password $DAGSHUB_TOKEN
+        dvc remote modify origin --local url https://dagshub.com/edisonfernandez/TelcoVision.dvc
 
     - name: 📥 Descargar datos versionados (DVC)
       run: dvc pull
