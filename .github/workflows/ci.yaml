@@ -23,20 +23,21 @@ jobs:
         pip install -r requirements.txt
         pip install dvc[all]
 
-    - name: 🔐 Configurar credenciales de DagsHub
+        - name: 🔐 Configurar credenciales de DagsHub (HTTP)
       env:
-        DAGSHUB_USER: "edisonjef"
-        DAGSHUB_TOKEN: "838331baac64c93dae8315a9defd4a4449bc936a"
+        DAGSHUB_USER: ${{ secrets.DAGSHUB_USER }}
+        DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
       run: |
-        # Guardar credenciales de Git para que DVC pueda acceder al remoto
         echo "machine dagshub.com login $DAGSHUB_USER password $DAGSHUB_TOKEN" > ~/.netrc
-        
-        # Exportar variables de entorno (necesarias para DVC >=3.x)
         echo "DAGSHUB_USER=$DAGSHUB_USER" >> $GITHUB_ENV
         echo "DAGSHUB_TOKEN=$DAGSHUB_TOKEN" >> $GITHUB_ENV
 
-        # Mostrar el remoto configurado
-        dvc remote list
+    - name: 🔐 Configurar credenciales DagsHub (S3)
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.DAGSHUB_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.DAGSHUB_SECRET_ACCESS_KEY }}
+      run: echo "S3 credentials ready."
+      
     - name: 📥 Descargar datos versionados (DVC)
       run: dvc pull
 
