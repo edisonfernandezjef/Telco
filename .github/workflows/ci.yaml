@@ -57,3 +57,14 @@ jobs:
 
     - name: 📊 Mostrar métricas
       run: cat metrics/metrics.json
+
+
+        
+    - name: 📥 Obtener métricas de main para comparar
+      run: |
+        git fetch origin main
+        git checkout origin/main -- metrics/metrics.json
+        mv metrics/metrics.json metrics_main.json
+
+    - name: 🔎 Comparar métricas con main
+      run: python src/compare_metrics.py
