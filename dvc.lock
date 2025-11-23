@@ -25,7 +25,7 @@ stages:
       size: 4688992
     - path: params.yaml
       hash: md5
-      md5: f234c4bbeb23013af8d5fa306a303754
+      md5: 11646271ae02c8f4b0d34a5ccf63ae95
       size: 296
     - path: src/train.py
       hash: md5
@@ -33,7 +33,7 @@ stages:
       size: 3199
     params:
       params.yaml:
-        model.C: 2.0
+        model.C: 0.5
         model.max_iter: 300
         model.solver: lbfgs
         path.metrics_path: metrics/metrics.json
@@ -44,9 +44,9 @@ stages:
     outs:
     - path: metrics/metrics.json
       hash: md5
-      md5: 1855f7b0cc5ec63050ffd9bd0c9c5aee
+      md5: f563264b4719d430150e61fc91a06ebf
       size: 64
     - path: models/telco_churn_model.pkl
       hash: md5
-      md5: 45446476e38a3dd3be75568a2fd271e2
+      md5: d3723ebe150aed0b29d2d4cbd8d564ab
       size: 1935
