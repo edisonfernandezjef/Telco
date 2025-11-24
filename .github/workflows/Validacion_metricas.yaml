@@ -6,7 +6,7 @@ on:
     branches: [ main ]
 
 jobs:
-  Validar_mejor_metrica:
+  Validacion_metricas:
     runs-on: ubuntu-latest
     steps:
     - name: 🧠 Clonar repositorio
