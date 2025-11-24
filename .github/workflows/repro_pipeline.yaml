@@ -1,13 +1,13 @@
-name: CI TelcoVision
+name: repro_pipeline
 
 on:
   push:
-    branches: [ ]
+    branches: [ci_cd  ]
   pull_request:
-    branches: [  ]
+    branches: [ ]
 
 jobs:
-  run_pipeline:
+  repro_pipeline:
     runs-on: ubuntu-latest
     steps:
     - name: 🧠 Clonar repositorio
