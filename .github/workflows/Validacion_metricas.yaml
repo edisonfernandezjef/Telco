@@ -58,7 +58,7 @@ jobs:
     - name: ⚙️ Ejecutar pipeline TelcoVision
       run: dvc repro
 
-      - name: 📥 Pushear los datos (DVC)
+    - name: 📥 Pushear los datos (DVC)
       run: dvc push  
 
     - name: 📊 Mostrar métricas
