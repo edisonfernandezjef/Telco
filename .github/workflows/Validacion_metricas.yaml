@@ -6,7 +6,7 @@ on:
     branches: [ main ]
 
 jobs:
-  Validar_mejor_metrica:
+  Validacion_metricas:
     runs-on: ubuntu-latest
     steps:
     - name: 🧠 Clonar repositorio
@@ -58,7 +58,7 @@ jobs:
     - name: ⚙️ Ejecutar pipeline TelcoVision
       run: dvc repro
 
-      - name: 📥 Pushear los datos (DVC)
+    - name: 📥 Pushear los datos (DVC)
       run: dvc push  
 
     - name: 📊 Mostrar métricas
