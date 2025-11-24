@@ -58,6 +58,9 @@ jobs:
     - name: ⚙️ Ejecutar pipeline TelcoVision
       run: dvc repro
 
+      - name: 📥 Pushear los datos (DVC)
+      run: dvc push  
+
     - name: 📊 Mostrar métricas
       run: cat metrics/metrics.json
 
@@ -65,5 +68,4 @@ jobs:
     - name: 🔎 Comparar métricas con main
       run: python src/compare_metrics.py
 
-    - name: 📥 Pushear los datos (DVC)
-      run: dvc push  
+    
