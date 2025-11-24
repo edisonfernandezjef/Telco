@@ -2,7 +2,7 @@ name: CI TelcoVision
 
 on:
   push:
-    branches: [feat-regularizacion-C05 ]
+    branches: [ ]
   pull_request:
     branches: [  ]
 
@@ -58,6 +58,9 @@ jobs:
 
     - name: 📊 Mostrar métricas
       run: cat metrics/metrics.json
+
+    - name: 📥 Pushear los datos (DVC)
+      run: dvc push
 
 
   
@@ -119,3 +122,6 @@ jobs:
 
     - name: 🔎 Comparar métricas con main
       run: python src/compare_metrics.py
+
+    - name: 📥 Pushear los datos (DVC)
+      run: dvc push  
