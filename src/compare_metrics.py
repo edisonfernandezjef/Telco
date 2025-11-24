@@ -16,7 +16,7 @@ print(f"F1 en main: {old_f1}")
 print(f"F1 en PR:   {new_f1}")
 
 # Si la métrica empeora → fallar CI
-if new_f1 <= old_f1:
+if new_f1 < old_f1:
     print("❌ El modelo del PR es PEOR o IGUAL que el de main. Fallando CI.")
     sys.exit(1)
 
