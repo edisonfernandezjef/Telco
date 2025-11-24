@@ -3,8 +3,6 @@ name: repro_pipeline
 on:
   push:
     branches: [ci_cd  ]
-  pull_request:
-    branches: [ ]
 
 jobs:
   repro_pipeline:
