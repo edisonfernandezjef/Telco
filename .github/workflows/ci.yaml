@@ -60,14 +60,7 @@ jobs:
       run: cat metrics/metrics.json
 
 
-    
-
-on:
-  push:
-    branches: []
-  pull_request:
-    branches: [  ]
-jobs:
+  
   Validacion_mejor_metrica:
     runs-on: ubuntu-latest
     steps:
