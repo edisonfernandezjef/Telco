@@ -52,6 +52,62 @@ jobs:
     - name: 📥 Descargar datos versionados (DVC)
       run: dvc pull
 
+
+    - name: ⚙️ Ejecutar pipeline TelcoVision
+      run: dvc repro
+
+    - name: 📊 Mostrar métricas
+      run: cat metrics/metrics.json
+
+
+    
+
+
+  Validacion_mejor_metrica:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🧠 Clonar repositorio
+      uses: actions/checkout@v4
+
+    - name: 🐍 Configurar Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
+
+    - name: 📦 Instalar dependencias
+      run: |
+        pip install -r requirements.txt
+        pip install dvc[all]
+
+    - name: 🔐 Configurar credenciales de DagsHub
+      env:
+        DAGSHUB_USER: ${{ secrets.DAGSHUB_USER }}
+        DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
+      run: |
+        echo "machine dagshub.com login $DAGSHUB_USER password $DAGSHUB_TOKEN" > ~/.netrc
+        echo "DAGSHUB_USER=$DAGSHUB_USER" >> $GITHUB_ENV
+        echo "DAGSHUB_TOKEN=$DAGSHUB_TOKEN" >> $GITHUB_ENV
+
+    - name: 🔐 Configurar credenciales S3 (para DVC)
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.DAGSHUB_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.DAGSHUB_SECRET_ACCESS_KEY }}
+      run: |
+        echo "Exportando credenciales S3 para DVC..."
+        echo "AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" >> $GITHUB_ENV
+        echo "AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" >> $GITHUB_ENV
+        echo "✅ Credenciales cargadas"
+
+    - name: 🔍 Probar conexión con DagsHub
+      run: |
+        echo "Probando conexión con DagsHub..."
+        dvc remote list
+        dvc list .   # muestra qué archivos están versionados
+        echo "✅ Conexión DVC OK"
+
+    - name: 📥 Descargar datos versionados (DVC)
+      run: dvc pull
+
     - name: 📦 Guardar métricas actuales de main
       run: |
         cp metrics/metrics.json metrics/metrics_main.json  
