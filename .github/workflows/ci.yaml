@@ -52,19 +52,16 @@ jobs:
     - name: 📥 Descargar datos versionados (DVC)
       run: dvc pull
 
+    - name: 📦 Guardar métricas actuales de main
+      run: |
+        cp metrics/metrics.json metrics/metrics_main.json  
+
     - name: ⚙️ Ejecutar pipeline TelcoVision
       run: dvc repro
 
     - name: 📊 Mostrar métricas
       run: cat metrics/metrics.json
 
-
-        
-    - name: 📥 Obtener métricas de main para comparar
-      run: |
-        git fetch origin main
-        git checkout origin/main -- metrics/metrics.json
-        mv metrics/metrics.json metrics_main.json
 
     - name: 🔎 Comparar métricas con main
       run: python src/compare_metrics.py
