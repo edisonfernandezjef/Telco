@@ -6,7 +6,7 @@ with open("metrics/metrics.json") as f:
     new_metrics = json.load(f)
 
 # Leer métricas de main
-with open("metrics\metrics_main.json") as f:
+with open("metrics/metrics_main.json") as f:
     old_metrics = json.load(f)
 
 new_f1 = new_metrics["f1_score"]
