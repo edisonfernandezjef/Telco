@@ -3,7 +3,8 @@ name: repro_pipeline
 on:
   push:
     branches: [ci_cd  ]
-
+  pull_request:
+    branches: [ main ]
 jobs:
   repro_pipeline:
     runs-on: ubuntu-latest
