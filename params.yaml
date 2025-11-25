@@ -4,8 +4,6 @@ model:
   max_iter: 189
   solver: lbfgs
 
-
-
 split:
   test_size: 0.3
   random_state: 42
