@@ -3,7 +3,7 @@ name: Validacion_metricas
 on:
   
   pull_request:
-    branches: [ main ]
+    branches: [  ]
 
 jobs:
   Validacion_metricas:
