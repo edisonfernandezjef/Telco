@@ -1,5 +1,5 @@
 # 📡 TelcoVision — Documentación del Proyecto (Etapas 1 a 6)
-![Pipeline](imagenes\Resultado_Pipeline_DagsHub.png)
+![Pipeline](imagenes/Resultado_Pipeline_DagsHub.png)
 
 
 ## 1. Introducción
@@ -155,7 +155,7 @@ Los resultados fueron registrados mediante:
 - MLflow en DagsHub  
 
 El modelo final se seleccionó comparando accuracy y F1-score.
-![Metricas](imagenes\Resultado_Metricas_MlFlow_DagsHub.png)
+![Metricas](imagenes/Resultado_Metricas_MlFlow_DagsHub.png)
 
 ---
 
@@ -172,7 +172,7 @@ Secrets utilizados:
 - `DAGSHUB_USER`  
 - `DAGSHUB_TOKEN`  
 
-![Repro_Pipeline](imagenes\Resultado_ReproPipeline_GitHubActions.png)
+![Repro_Pipeline](imagenes/Resultado_ReproPipeline_GitHubActions.png)
 
 ---
 
@@ -189,10 +189,10 @@ Secrets utilizados:
 En esta estapa se valida cada PR con el archivo validacion_metricas.yaml, si las modificaciones generan mejoras en las metricas del modelo se autoriza el MERGE al main, sino se rechaza el PR.
 
 Validacion TRUE:
-![ValidacionMetricasExitoso](imagenes\Resultado_ValidacionMetricasExitoso_GitHubActions.png)
+![ValidacionMetricasExitoso](imagenes/Resultado_ValidacionMetricasExitoso_GitHubActions.png)
 
 Validacion False:
-![ValidacionMetricasFallida](imagenes\Resultado_ValidacionMetricasNegativa_GitHubActions.png)
+![ValidacionMetricasFallida](imagenes/Resultado_ValidacionMetricasNegativa_GitHubActions.png)
 
 
 ---
