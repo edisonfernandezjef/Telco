@@ -1,7 +1,7 @@
 model:
   type: LogisticRegression
-  C: 2.0
-  max_iter: 189
+  C: 1.0
+  max_iter: 10
   solver: lbfgs
 
 split:
